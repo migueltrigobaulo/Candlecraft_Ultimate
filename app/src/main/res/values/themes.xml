@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.CandlecraftUltimate" parent="android:Theme.Material.Light.NoActionBar" >
+        <item name="android:colorPrimary">@color/barn_red</item>
+        <item name="android:colorPrimaryDark">@color/barn_red</item>
+        <item name="android:statusBarColor">@color/teal_red</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:navigationBarColor">@color/teal_red</item>
+    </style>
+</resources>

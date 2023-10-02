@@ -15,6 +15,7 @@ import hc.candlecraft.candlecraftultimate.feature_recipe.domain.use_case.RecipeU
 import hc.candlecraft.candlecraftultimate.ui.theme.cardColorSchemeThemed
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -33,10 +34,16 @@ class AddEditRecipeViewModel @Inject constructor(
 
     private var currentRecipeId: Int? = null
 
-    private val _recipeName = mutableStateOf("")
-    val recipeName: State<String> = _recipeName
+    var isNew: Boolean = false
 
-    //private val _noteContent = mutableListOf<>()
+    private val _recipeName = MutableStateFlow("")
+    val recipeName = _recipeName.asStateFlow()
+
+    private val _fragrancePercentage = MutableStateFlow(0)
+    val fragrancePercentage = _fragrancePercentage.asStateFlow()
+
+    private val _recipeWaxType = MutableStateFlow("")
+    val recipeWaxType = _recipeWaxType.asStateFlow()
 
     private val _selectedMeasuringUnit = MutableStateFlow<MeasuringUnit>(MeasuringUnit.Grams)
     val selectedMeasuringUnit: MutableStateFlow<MeasuringUnit> = _selectedMeasuringUnit
@@ -57,6 +64,17 @@ class AddEditRecipeViewModel @Inject constructor(
                 }
             }
         }
+        savedStateHandle.get<Boolean>("isNew")?.let { isNew -> this.isNew = isNew}
+    }
+
+    fun setName(recipeName: String) {
+        _recipeName.value = recipeName
+    }
+    fun setRecipeWaxType(recipeWaxType: String) {
+        _recipeWaxType.value = recipeWaxType
+    }
+    fun setFragrancePercentage(fragrancePercentage: Int) {
+        _fragrancePercentage.value = fragrancePercentage
     }
 
     private fun getIngredients(recipeId: Int) {

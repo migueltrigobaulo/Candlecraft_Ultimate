@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -80,22 +79,10 @@ private val DarkColorScheme = darkColorScheme(
     scrim = md_theme_dark_scrim
 )
 
-private val CardLightColorScheme = CardColorScheme(CardColor.LightBlue,CardColor.LightRed,CardColor.LightGreen,CardColor.LightPink)
-private val CardDarkColorScheme = CardColorScheme(CardColor.DarkBlue,CardColor.DarkRed,CardColor.DarkGreen,CardColor.DarkPink)
-
-var cardColorSchemeThemed by mutableStateOf(CardLightColorScheme)
-
-@Suppress("unused")
-var ColorScheme.cardColorBlueThemed: CardColorScheme
-    get() = cardColorSchemeThemed
-    set(value) {
-        cardColorSchemeThemed = value
-    }
 
 @Composable
 fun CandlecraftUltimateTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -110,10 +97,6 @@ fun CandlecraftUltimateTheme(
         else -> LightColorScheme
     }
 
-    colorScheme.cardColorBlueThemed = when {
-        darkTheme -> CardDarkColorScheme
-        else -> CardLightColorScheme
-    }
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

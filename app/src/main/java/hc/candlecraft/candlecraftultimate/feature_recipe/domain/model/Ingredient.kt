@@ -20,8 +20,7 @@ data class Ingredient(
     @PrimaryKey var id: Int? = null,
     var recipeId: Int? = null,
     val name: String,
-    val amount: Float,
-    val unitId: Int
+    val amount: Float
 ) {}
 
 class InvalidIngredientNameException() : Exception()

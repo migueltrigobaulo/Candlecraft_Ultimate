@@ -3,6 +3,6 @@ package hc.candlecraft.candlecraftultimate.feature_recipe.presentation.add_edit_
 import hc.candlecraft.candlecraftultimate.feature_recipe.domain.model.Ingredient
 
 data class IngredientsState(
-    val ingredients: List<Ingredient> = emptyList(),
+    val ingredients: ArrayList<Ingredient> = arrayListOf(),
     val noIngredientsInDB: Boolean = false
 )

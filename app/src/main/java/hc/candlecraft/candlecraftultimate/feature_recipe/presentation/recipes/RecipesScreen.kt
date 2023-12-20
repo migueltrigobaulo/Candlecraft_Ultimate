@@ -14,18 +14,21 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import hc.candlecraft.candlecraftultimate.MainActivity
 import hc.candlecraft.candlecraftultimate.R
 import hc.candlecraft.candlecraftultimate.feature_recipe.presentation.recipes.components.RecipeItem
 import hc.candlecraft.candlecraftultimate.navigation.Screen
@@ -79,6 +82,8 @@ fun RecipesScreen(
         }
     }
 
+    val activity = LocalContext.current as MainActivity
+
 
     MaterialTheme {
         Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -94,7 +99,6 @@ fun RecipesScreen(
                     },
                     text = {
                         Text(
-                            modifier = Modifier.padding(bottom = 5.dp),
                             text = stringResource(id = R.string.new_recipe)
                         )
                     },
@@ -126,9 +130,9 @@ fun RecipesScreen(
                         }
                     },
                     actions = {
-                        IconButton(onClick = { /* doSomething() */ }) {
+                        IconButton(onClick = { activity.changeTheme() }) {
                             Icon(
-                                imageVector = Icons.Filled.Favorite,
+                                imageVector = Icons.Filled.LightMode,
                                 contentDescription = "Localized description"
                             )
                         }
@@ -136,7 +140,8 @@ fun RecipesScreen(
                     scrollBehavior = scrollBehavior
                 )
 
-            }, content = { paddingValues ->
+            },
+            content = { paddingValues ->
                 LazyVerticalGrid(
                     modifier = Modifier.padding(paddingValues),
                     columns = GridCells.Fixed(1),

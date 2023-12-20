@@ -169,7 +169,6 @@ fun HeaderImage(modifier: Modifier) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
     OutlinedTextField(
@@ -184,7 +183,6 @@ fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
     OutlinedTextField(

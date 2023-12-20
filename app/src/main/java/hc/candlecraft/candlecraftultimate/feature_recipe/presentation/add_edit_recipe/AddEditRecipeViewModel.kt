@@ -1,5 +1,6 @@
 package hc.candlecraft.candlecraftultimate.feature_recipe.presentation.add_edit_recipe
 
+import android.net.Uri
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -12,7 +13,6 @@ import hc.candlecraft.candlecraftultimate.feature_recipe.domain.model.Ingredient
 import hc.candlecraft.candlecraftultimate.feature_recipe.domain.model.Recipe
 import hc.candlecraft.candlecraftultimate.feature_recipe.domain.use_case.IngredientUseCases
 import hc.candlecraft.candlecraftultimate.feature_recipe.domain.use_case.RecipeUseCases
-import hc.candlecraft.candlecraftultimate.ui.theme.cardColorSchemeThemed
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 class AddEditRecipeViewModel @Inject constructor(
@@ -29,8 +28,8 @@ class AddEditRecipeViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(IngredientsState())
-    val state: State<IngredientsState> = _state
+    private val _ingredients = mutableStateOf(IngredientsState())
+    val ingredients: State<IngredientsState> = _ingredients
 
     private var currentRecipeId: Int? = null
 
@@ -38,6 +37,15 @@ class AddEditRecipeViewModel @Inject constructor(
 
     private val _recipeName = MutableStateFlow("")
     val recipeName = _recipeName.asStateFlow()
+
+    private val _recipePicture = MutableStateFlow<Uri?>(null)
+    val recipePicture = _recipePicture.asStateFlow()
+
+    private val _recipeNotes = MutableStateFlow("")
+    val recipeNotes = _recipeNotes.asStateFlow()
+
+    private val _fragranceName = MutableStateFlow("")
+    val fragranceName = _fragranceName.asStateFlow()
 
     private val _fragrancePercentage = MutableStateFlow(0)
     val fragrancePercentage = _fragrancePercentage.asStateFlow()
@@ -59,6 +67,11 @@ class AddEditRecipeViewModel @Inject constructor(
                     recipeUseCases.getRecipe(recipeId)?.also { recipe ->
                         currentRecipeId = recipe.id
                         _recipeName.value = recipe.name
+                        _recipeWaxType.value = recipe.waxType
+                        _recipeNotes.value = recipe.notes
+                        _fragranceName.value = recipe.fragranceName
+                        _fragrancePercentage.value = recipe.fragrancePercentage
+                        _recipePicture.value = recipe.recipePicture
                     }
                     getIngredients(recipeId)
                 }
@@ -70,8 +83,18 @@ class AddEditRecipeViewModel @Inject constructor(
     fun setName(recipeName: String) {
         _recipeName.value = recipeName
     }
+
+    fun setNotes(recipeNotes: String) {
+        _recipeNotes.value = recipeNotes
+    }
+    fun setFragranceName(fragranceName: String) {
+        _fragranceName.value = fragranceName
+    }
     fun setRecipeWaxType(recipeWaxType: String) {
         _recipeWaxType.value = recipeWaxType
+    }
+    fun setRecipePicture(recipePicture: Uri) {
+        _recipePicture.value = recipePicture
     }
     fun setFragrancePercentage(fragrancePercentage: Int) {
         _fragrancePercentage.value = fragrancePercentage
@@ -80,12 +103,8 @@ class AddEditRecipeViewModel @Inject constructor(
     private fun getIngredients(recipeId: Int) {
         getIngredientsJob?.cancel()
         getIngredientsJob = ingredientUseCases.getIngredients(recipeId).onEach { ingredients ->
-            _state.value = _state.value.copy(ingredients = ingredients)
+            _ingredients.value = _ingredients.value.copy(ingredients = ArrayList(ingredients))
         }.launchIn(viewModelScope)
-    }
-
-    fun onSelectedMeasuringUnitsChanged(measuringUnit: MeasuringUnit) {
-        _selectedMeasuringUnit.value = measuringUnit
     }
 
     fun addIngredient() {
@@ -98,23 +117,19 @@ class AddEditRecipeViewModel @Inject constructor(
                 Ingredient(
                     recipeId = currentRecipeId,
                     name = namesArray.random(),
-                    amount = 5F,
-                    unitId = MeasuringUnit.Grams.id
+                    amount = 5F
                 )
             )
         }
     }
 
     fun addRecipe() {
-        //TODO: REMOVE THIS
-        val namesArray = arrayOf(
-            "Mango Tango", "First Date"
-        )
         viewModelScope.launch {
             recipeUseCases.insertRecipe(
                 Recipe(
-                    name = namesArray[Random.nextInt().mod(namesArray.size)],
-                    description = "Descripción",
+                    id = currentRecipeId,
+                    name = recipeName.value,
+                    notes = recipeNotes.value,
                     lastEditTimestamp = System.currentTimeMillis(),
                     icon = arrayOf(
                         R.drawable.image_candle_1,
@@ -123,12 +138,11 @@ class AddEditRecipeViewModel @Inject constructor(
                         R.drawable.image_candle_4,
                         R.drawable.image_candle_5,
                         R.drawable.image_candle_6
-                    ).random(), colorId = arrayOf(
-                        cardColorSchemeThemed.red.id,
-                        cardColorSchemeThemed.green.id,
-                        cardColorSchemeThemed.pink.id,
-                        cardColorSchemeThemed.blue.id
-                    ).random()
+                    ).random(),
+                    fragranceName = fragranceName.value,
+                    waxType = recipeWaxType.value,
+                    fragrancePercentage = _fragrancePercentage.value,
+                    recipePicture = _recipePicture.value
                 )
             )
         }

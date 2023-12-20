@@ -11,85 +11,75 @@ import hc.candlecraft.candlecraftultimate.R
 
 // Set of Material typography styles to start with
 
-val font = FontFamily(
-    fonts = listOf(
-        Font(R.font.merienda),
-        Font(R.font.merienda, weight = FontWeight.Bold),
-        Font(R.font.merienda, weight = FontWeight.Light),
-        Font(R.font.merienda, weight = FontWeight.Thin),
-        Font(R.font.merienda, weight = FontWeight.Normal, style = FontStyle.Italic)
-    )
-)
-
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = font,
+        fontFamily = FontFamily.Default,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.2.sp
     ),
     bodyMedium = TextStyle(
-        fontFamily = font,
+        fontFamily = FontFamily.Default,
         fontSize = 14.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.2.sp
     ),
     bodySmall = TextStyle(
-        fontFamily = font,
+        fontFamily = FontFamily.Default,
         fontSize = 12.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.2.sp
     ),
     headlineMedium = TextStyle(
-        fontFamily = font,
+        fontFamily = FontFamily.Default,
         fontSize = 20.sp,
         fontWeight = FontWeight.Bold,
         lineHeight = 24.sp,
         letterSpacing = 0.2.sp
     ),
     labelLarge = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     ),
     labelMedium = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     ),
     labelSmall = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     ),
     titleLarge = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     ),
     titleMedium = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     ),
     titleSmall = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     ),
     displayLarge = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     ),
     displayMedium = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     ),
     displaySmall = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     ),
     headlineLarge = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     ),
     headlineSmall = TextStyle(
-        fontFamily = font
+        fontFamily = FontFamily.Default
     )
     /* Other default text styles to override
     titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = FontFamily.Default,,
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),
     labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = FontFamily.Default,,
         fontWeight = FontWeight.Medium,
         fontSize = 11.sp,
         lineHeight = 16.sp,

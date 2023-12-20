@@ -95,35 +95,6 @@ class RecipesViewModel @Inject constructor(
         }
     }
 
-    fun addRecipe() {
-        //TODO: REMOVE THIS
-        val namesArray = arrayOf(
-            "Mango Tango", "Primera cita",
-            "Carnaval Cítrico",
-            "Vainilla Vibrante",
-            "Otoño Oceánico",
-            "Rosa Rústica",
-            "Canela Caliente",
-            "Bayas Blancas",
-            "Cabaña Campestre",
-            "Zarzamora Zen",
-            "Durazno Dulce",
-            "Eucalipto Exótico",
-            "Fresca Floral"
-        )
-        viewModelScope.launch {
-            recipeUseCases.insertRecipe(
-                Recipe(
-                    name = namesArray[Random.nextInt().mod(namesArray.size)],
-                    description = "Descripción",
-                    lastEditTimestamp = System.currentTimeMillis(),
-                    icon = iconIDs.random(),
-                    colorId = colorIds.random().toArgb()
-                )
-            )
-        }
-    }
-
     fun deleteRecipe(recipe: Recipe) {
         viewModelScope.launch {
             recipeUseCases.deleteRecipe(

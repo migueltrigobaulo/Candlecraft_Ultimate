@@ -19,6 +19,12 @@
     <string name="percentage_abbreviated">%</string>
     <string name="start_batch">Empezar remesa</string>
     <string name="recipe_name">Nombre de la receta</string>
+    <string name="name">Nombre</string>
     <string name="wax_type">Tipo de cera</string>
-    <string name="fragance_amount">Cantidad de fragancia</string>
+    <string name="fragrance_amount">Cantidad de fragancia</string>
+    <string name="amount">Cantidad</string>
+    <string name="fragrance_name">Nombre de la fragancia</string>
+    <string name="recipe_notes">Notas</string>
+    <string name="additives">Aditivos</string>
+    <string name="colorants">Colorantes y tintes</string>
 </resources>

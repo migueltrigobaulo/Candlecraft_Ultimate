@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'hc.candlecraft.candlecraftultimate'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "hc.candlecraft.candlecraftultimate"
         minSdk 30
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -77,18 +77,23 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:1.1.0-alpha01"
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.45"
     kapt 'com.google.dagger:hilt-android-compiler:2.45'
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
+    kapt "androidx.hilt:hilt-compiler:1.1.0"
 
     // Room
-    implementation "androidx.room:room-runtime:2.5.2"
-    kapt "androidx.room:room-compiler:2.5.2"
+    implementation "androidx.room:room-runtime:2.6.1"
+    kapt "androidx.room:room-compiler:2.6.1"
 
     // Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:2.5.2"
+    implementation "androidx.room:room-ktx:2.6.1"
+
+    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+
 }
